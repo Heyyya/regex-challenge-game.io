@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Final Results — Regex Challenge Game</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="bg-decoration">
+  <div class="bg-blob blob-1"></div>
+  <div class="bg-blob blob-2"></div>
+  <div class="bg-blob blob-3"></div>
+</div>
+
+<div id="app">
+  <section class="screen active">
+    <div class="results-wrap scale-in">
+      <div class="trophy-illustration">
+        <i data-lucide="trophy" class="icon-xxl"></i>
+      </div>
+      <h2 class="results-title">Mission Complete</h2>
+      <p class="results-subtitle">You've mastered every regex category. Here's how you did.</p>
+
+      <div class="results-grid">
+        <div class="result-tile highlight">
+          <span class="result-value" id="result-final-score">0</span>
+          <span class="result-label">Final Score</span>
+        </div>
+        <div class="result-tile">
+          <span class="result-value" id="result-accuracy">0%</span>
+          <span class="result-label">Accuracy</span>
+        </div>
+        <div class="result-tile">
+          <span class="result-value" id="result-correct">0</span>
+          <span class="result-label">Correct Answers</span>
+        </div>
+        <div class="result-tile">
+          <span class="result-value" id="result-incorrect">0</span>
+          <span class="result-label">Incorrect Attempts</span>
+        </div>
+        <div class="result-tile">
+          <span class="result-value" id="result-avg-time">0s</span>
+          <span class="result-label">Avg. Response Time</span>
+        </div>
+        <div class="result-tile">
+          <span class="result-value" id="result-fastest">0s</span>
+          <span class="result-label">Fastest Answer</span>
+        </div>
+        <div class="result-tile">
+          <span class="result-value" id="result-slowest">0s</span>
+          <span class="result-label">Slowest Answer</span>
+        </div>
+        <div class="result-tile">
+          <span class="result-value" id="result-total-time">0s</span>
+          <span class="result-label">Total Time</span>
+        </div>
+      </div>
+
+      <p class="results-categories-label">Completed Categories</p>
+      <div id="result-categories" class="result-categories"></div>
+
+      <div class="results-actions">
+        <button id="btn-save-score" class="btn btn-primary btn-lg ripple">
+          <i data-lucide="save"></i>
+          Save Score to Leaderboard
+        </button>
+        <a href="index.html" id="btn-play-again" class="btn btn-secondary btn-lg ripple">
+          <i data-lucide="rotate-ccw"></i>
+          Play Again
+        </a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- SAVE SCORE MODAL -->
+<div id="modal-nickname" class="modal-overlay">
+  <div class="modal scale-in">
+    <button class="modal-close" data-close-modal="modal-nickname"><i data-lucide="x"></i></button>
+    <div class="modal-icon"><i data-lucide="award"></i></div>
+    <h3 class="modal-title">Save Your Score</h3>
+    <p class="modal-subtitle">
+      Saving as <strong id="nickname-display">—</strong>. This score will be added
+      to your running leaderboard total.
+    </p>
+    <p id="nickname-error" class="feedback-message"></p>
+    <button id="btn-confirm-nickname" class="btn btn-primary btn-lg ripple">
+      <i data-lucide="check"></i>
+      Save & View Leaderboard
+    </button>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+<canvas id="confetti-canvas"></canvas>
+
+<script src="supabase.js"></script>
+<script src="ui.js"></script>
+<script src="state.js"></script>
+<script src="confetti.js"></script>
+<script src="results.js"></script>
+</body>
+</html>

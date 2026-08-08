@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Challenge — Regex Challenge Game</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="bg-decoration">
+  <div class="bg-blob blob-1"></div>
+  <div class="bg-blob blob-2"></div>
+  <div class="bg-blob blob-3"></div>
+</div>
+
+<div id="app">
+
+  <!-- CHALLENGE VIEW -->
+  <section id="view-challenge" class="screen active">
+    <div class="challenge-topbar">
+      <a href="categories.html" class="btn btn-icon" title="Back to categories">
+        <i data-lucide="arrow-left"></i>
+      </a>
+
+      <div class="challenge-meta">
+        <span id="challenge-category-name" class="challenge-category-name">Category</span>
+        <span class="challenge-counter" id="challenge-counter">Challenge 1 / 1</span>
+      </div>
+
+      <div class="topbar-stats">
+        <div class="stat-pill">
+          <i data-lucide="zap"></i>
+          <span id="stat-score">0</span>
+        </div>
+        <div class="stat-pill timer-pill">
+          <i data-lucide="timer"></i>
+          <span id="stat-timer">0s</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="challenge-progress-track">
+      <div id="challenge-progress-fill" class="challenge-progress-fill"></div>
+    </div>
+
+    <div class="challenge-card-wrap">
+      <div id="challenge-card" class="challenge-card fade-in-up">
+        <div class="challenge-badges">
+          <span id="challenge-difficulty" class="badge badge-medium">Medium</span>
+          <span id="challenge-points" class="badge badge-points">+10 pts</span>
+        </div>
+
+        <p id="challenge-description" class="challenge-description">Loading challenge...</p>
+
+        <div class="regex-display">
+          <span class="regex-display-label">PATTERN</span>
+          <code id="challenge-pattern" class="regex-display-code"></code>
+        </div>
+
+        <form id="answer-form" class="answer-form" autocomplete="off">
+          <div class="input-wrap">
+            <input
+              type="text"
+              id="answer-input"
+              class="answer-input"
+              placeholder="Type your answer here..."
+              autocomplete="off"
+              spellcheck="false"
+            />
+            <div id="feedback-icon" class="feedback-icon"></div>
+          </div>
+
+          <p id="feedback-message" class="feedback-message"></p>
+
+          <div class="challenge-actions">
+            <button type="submit" id="btn-submit" class="btn btn-primary ripple">
+              <i data-lucide="check"></i>
+              Submit
+            </button>
+            <button type="button" id="btn-next" class="btn btn-success ripple" disabled>
+              <i data-lucide="arrow-right"></i>
+              Next Challenge
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORY COMPLETE VIEW (shown inline after last challenge in a category) -->
+  <section id="view-category-complete" class="screen">
+    <div class="complete-card scale-in">
+      <div class="complete-icon-wrap success-pulse">
+        <i data-lucide="party-popper" class="icon-xl"></i>
+      </div>
+      <h2 class="complete-title">Category Complete!</h2>
+      <p id="category-complete-name" class="complete-subtitle">Category Mastered</p>
+
+      <div class="complete-stats">
+        <div class="complete-stat">
+          <span class="complete-stat-value" id="category-complete-score">0</span>
+          <span class="complete-stat-label">Total Score</span>
+        </div>
+        <div class="complete-stat">
+          <span class="complete-stat-value" id="category-complete-bonus">+0</span>
+          <span class="complete-stat-label">Bonus Points</span>
+        </div>
+      </div>
+
+      <a id="btn-next-category" href="categories.html" class="btn btn-primary btn-lg ripple">
+        <i data-lucide="arrow-right"></i>
+        <span id="btn-next-category-label">Next Category</span>
+      </a>
+    </div>
+  </section>
+
+</div>
+
+<div id="toast" class="toast"></div>
+<canvas id="confetti-canvas"></canvas>
+
+<script src="supabase.js"></script>
+<script src="ui.js"></script>
+<script src="state.js"></script>
+<script src="confetti.js"></script>
+<script src="game.js"></script>
+</body>
+</html>
