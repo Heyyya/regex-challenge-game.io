@@ -7,14 +7,20 @@ document.addEventListener('DOMContentLoaded', init);
 
 async function init() {
   initIcons();
-  setupContinuePlayingLinks();
   const listEl = document.getElementById('leaderboard-list');
+
+  try {
+    setupContinuePlayingLinks();
+  } catch (err) {
+    console.error('Error setting up continue-playing links:', err);
+  }
 
   try {
     const entries = await fetchTopLeaderboard();
     renderLeaderboard(entries);
   } catch (err) {
-    listEl.innerHTML = `<div class="leaderboard-empty">${escapeHtml(err.message)}</div>`;
+    console.error('Error loading leaderboard:', err);
+    listEl.innerHTML = `<div class="leaderboard-empty">${escapeHtml(err.message || 'Unable to load the leaderboard.')}</div>`;
   }
   initIcons();
 }
